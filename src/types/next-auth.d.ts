@@ -1,4 +1,5 @@
 import 'next-auth'
+import { DefaultSession } from 'next-auth'
 
 
 declare module 'next-auth' {
@@ -14,7 +15,7 @@ declare module 'next-auth' {
             isVerified? : boolean
             isAccesptingMessages? : boolean
             username? : string
-        }
+        } & DefaultSession['user']
     }
 }
 
