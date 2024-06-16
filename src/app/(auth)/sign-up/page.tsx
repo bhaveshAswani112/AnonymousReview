@@ -46,6 +46,7 @@ export default function page() {
   })
   useEffect(() => {
     if(username){
+      // console.log("Username is " + username)
       setCheckingUsername(true)
       setUsernameMessage('')
       axios.get(`/api/check-username-unique?username=${username}`).then((resp) => resp.data).then((data) => {
@@ -72,9 +73,10 @@ export default function page() {
       })
       router.replace(`/verify/${username}`);
     } catch (error : any) {
+      // console.log(error)
         toast({
           title : "Failed",
-          description : error.resp?.data?.message || "Sign up failed",
+          description : error?.response?.data?.message || "Sign up failed",
           variant : "destructive"
       })
     }

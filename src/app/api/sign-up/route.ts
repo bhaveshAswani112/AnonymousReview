@@ -17,7 +17,7 @@ export async function POST(request : Request) {
             if(existingUser?.isVerified){
                 return Response.json({
                     success : false,
-                    message : "User already exists"
+                    message : "User with this mail id already exist"
                 },
                 {
                     status : 400
@@ -63,7 +63,7 @@ export async function POST(request : Request) {
             })
         
     } catch (error) {
-        console.error("Error registring user")
+        console.error("Error registring user " + error.message)
         Response.json({
             message : "User registration failed",
             success : false
