@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDb } from "@/lib/dbConnection";
 import { UserModel } from "@/model/User";
+import bcrypt from "bcryptjs"
 
 
 
@@ -16,22 +17,26 @@ export const authOptions : NextAuthOptions = {
             async authorize(credentials) : Promise<any>{
                 try {
                     await connectDb()
+                    console.log(credentials?.email)
                     const existingUser = await UserModel.findOne({
                         email : credentials?.email
                     })
                     if(existingUser){
-                        if(existingUser.isVerified){
-                            return existingUser
+                        if(!existingUser.isVerified){
+                            throw new Error("User is not verified")
                         }
-                        else{
-                            throw new Error("User is not verified.")
+                        const passwordCheck = await bcrypt.compare(credentials?.password || "",existingUser.password)
+                        if(!passwordCheck){
+                            throw new Error("Incorrect password")
                         }
+                        return existingUser
                     }
                     else{
                         throw new Error("User does not exist")
                     }
                 } catch (error) {
-                    throw new Error("Error during sign in")
+                    // @ts-ignore
+                    throw new Error(error?.message || "Error during sign in")
                 }
             }
         })

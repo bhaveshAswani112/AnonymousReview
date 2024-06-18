@@ -10,7 +10,6 @@ import { SignUpSchema } from "@/Schemas/SignUp"
 import {useRouter} from "next/navigation"
 import {z} from "zod"
 import axios from "axios"
-import { redirect } from 'next/navigation'
 import {
   Form,
   FormControl,

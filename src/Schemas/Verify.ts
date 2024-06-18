@@ -1,5 +1,5 @@
 import {z} from "zod"
 
 export const VerifySchema = z.object({
-    code : z.string().length(6,"Code should be of length 6")
+    code : z.string().length(6,"Your one-time password must be 6 characters.")
 })
