@@ -68,7 +68,7 @@ export async function GET(request : Request) {
                 status : 400
             })
         }
-        console.log(sessionUser)
+        // console.log(sessionUser)
         const user = await UserModel.findOne({_id : sessionUser._id})
         if(!user){
             console.log("No user")

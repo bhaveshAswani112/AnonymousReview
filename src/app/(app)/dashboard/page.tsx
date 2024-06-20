@@ -111,7 +111,7 @@ function page() {
 
 
   if(!session || !session?.user){
-    return <div>Please LogIn</div>
+    return <div className='text-center mt-2 font-semibold'>Please Login</div>
   }
   const {username}  = session?.user as User
   const baseUrl = `${window.location.protocol}//${window.location.host}`
