@@ -22,13 +22,21 @@ export async function POST(request : Request){
         const messages = await UserModel.aggregate([
             {$match : {id : userId}},
             {$unwind : '$Messages'},
-            {$sort : {"$Messages.createdAt" : -1}},
+            {$sort : {"Messages.createdAt" : -1}},
             {$group : {_id : "$_id" , Messages : {$push : "$Messages"}}}
         ])
 
-        if(!messages || messages.length===0){
+        if(!messages){
             return Response.json({
                 message : "User not found",
+                success : false,
+            },{
+                status : 400
+            })
+        }
+        if(messages.length==0){
+            return Response.json({
+                message : "No Messages for user",
                 success : false
             },{
                 status : 400

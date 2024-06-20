@@ -7,6 +7,7 @@ import { User } from "next-auth";
 
 export async function POST(request : Request){
     try {
+        // console.log("Hello from accept message status POST")
         await connectDb()
         const session = await getServerSession(authOptions)
         const sessionUser : User  = session?.user as User
@@ -19,6 +20,8 @@ export async function POST(request : Request){
             })
         }
         const {acceptMessages} = await request.json()
+        // console.log("I have accept messages")
+        // console.log(acceptMessages)
         const user  = await UserModel.findByIdAndUpdate(sessionUser._id , {
             isAccepting : acceptMessages
         },{
@@ -53,8 +56,9 @@ export async function POST(request : Request){
 
 export async function GET(request : Request) {
     try {
+        // console.log("Hello from accept message status")
         await connectDb()
-        const session = await getServerSession()
+        const session = await getServerSession(authOptions)
         const sessionUser : User = session?.user as User
         if(!session || !sessionUser){
             return Response.json({
@@ -64,8 +68,10 @@ export async function GET(request : Request) {
                 status : 400
             })
         }
+        console.log(sessionUser)
         const user = await UserModel.findOne({_id : sessionUser._id})
         if(!user){
+            console.log("No user")
             return Response.json({
                 message : "Failed to get accept messages status",
                 success : false
@@ -75,15 +81,15 @@ export async function GET(request : Request) {
         }
         return Response.json({
             message : "Accepting message status received",
-            success : false,
+            success : true,
             isAcceptingMessage : user.isAccepting
         },{
             status : 200
         })
     } catch (error) {
+        console.log("Error in get accept message status")
         console.log(error)
         return Response.json({
-            
             message : "Failed to get accept messages status",
             success : false
         },{

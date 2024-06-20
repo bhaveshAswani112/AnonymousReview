@@ -10,10 +10,10 @@ export async  function middleware(request: NextRequest) {
   // if(token && (url.pathname.startsWith("sign-in"))){
   //   return NextResponse.redirect(new URL('/dashboard', request.url))
   // }
-  // return NextResponse.redirect(new URL('/home', request.url))
+  // return NextResponse.redirect(new URL('/sign-in', request.url))
 }
  
-// See "Matching Paths" below to learn more
+
 export const config = {
   matcher: ['/sign-in'],
 }
