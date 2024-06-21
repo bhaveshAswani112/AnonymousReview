@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/context/AuthProvider";
 import { Toaster } from "@/components/ui/toaster"
+import { ThemeProvider } from "@/components/ThemeCard"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,11 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <AuthProvider>
-      <body className={inter.className}>{children}
+      
+      <body className={inter.className}>
+        
+        {children}
         <Toaster />
       </body>
+      
       </AuthProvider>
     </html>
     

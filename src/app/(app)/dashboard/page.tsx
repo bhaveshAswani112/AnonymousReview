@@ -16,6 +16,8 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Loader2, RefreshCcw } from 'lucide-react';
 import MessageCard from '@/components/MessageCard';
+import {MessageCardSkeleton} from '@/components/MessageSkeleton';
+
 function page() {
   const [messages , setMessages] = useState<Message[]>([]);
   const [isLoading , setIsLoading] = useState(false)
@@ -158,13 +160,24 @@ function page() {
         }}
       >
         {isLoading ? (
+          <div>
           <Loader2 className="h-4 w-4 animate-spin" />
+           
+          </div>
         ) : (
           <RefreshCcw className="h-4 w-4" />
         )}
       </Button>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {messages.length > 0 ? (
+        {isLoading ? (
+          <>
+          <MessageCardSkeleton/>
+          <MessageCardSkeleton/>
+          <MessageCardSkeleton/>
+          <MessageCardSkeleton/>
+          </>
+        ) :  
+        (messages.length > 0 ? (
           messages.map((message, index) => (
             <MessageCard
             key={index}
@@ -174,7 +187,8 @@ function page() {
           ))
         ) : (
           <p>No messages to display.</p>
-        )}
+        ))
+        }
       </div>
     </div>
   )

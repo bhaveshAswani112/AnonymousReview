@@ -60,7 +60,7 @@ function MessageCard({Message , handleMessageDelete} : MessageType) {
     <CardTitle>{Message.content}</CardTitle>
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="py-2 px-1"  variant="destructive"><X className="w-5 h-5" /></Button>
+        <Button className=""  variant="destructive"><X className="w-5 h-5" /></Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
