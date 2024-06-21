@@ -37,6 +37,7 @@ function MessageCard({Message , handleMessageDelete} : MessageType) {
 
     const handleDelete = async () => {
         try {
+            console.log(Message._id)
             const res = await axios.delete(`/api/delete-message/${Message._id}`)
             toast({
                 title : "Success",
@@ -45,6 +46,7 @@ function MessageCard({Message , handleMessageDelete} : MessageType) {
             // @ts-ignore
             handleMessageDelete(Message._id)
         } catch (error : any) {
+          console.log(error)
             toast({
                 title : "Failed",
                 description : error?.response?.data?.message || "Error in Message deletion.",
@@ -55,10 +57,10 @@ function MessageCard({Message , handleMessageDelete} : MessageType) {
   return (
 <Card>
   <CardHeader>
-    <CardTitle>Card Title</CardTitle>
+    <CardTitle>{Message.content}</CardTitle>
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive"><X/></Button>
+        <Button className="py-2 px-1"  variant="destructive"><X className="w-5 h-5" /></Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -74,7 +76,7 @@ function MessageCard({Message , handleMessageDelete} : MessageType) {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-    <CardDescription>Card Description</CardDescription>
+    
   </CardHeader>
 </Card>
 

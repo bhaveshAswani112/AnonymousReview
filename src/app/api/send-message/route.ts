@@ -5,6 +5,7 @@ import {Message} from "@/model/User"
 export async function POST(request : Request){
     try {
         await connectDb()
+        console.log("Hello from sendmessage")
         const {username , content}  = await request.json()
         const user = await UserModel.findOne({username})
         if(!user){
@@ -32,7 +33,10 @@ export async function POST(request : Request){
         return Response.json({
             message : "Message sent successfully",
             success : true
-        })
+        },
+    {
+        status : 200
+    })
 
     } catch (error) {
         // @ts-ignore

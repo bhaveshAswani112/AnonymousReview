@@ -20,7 +20,7 @@ export async function POST(request : Request){
         }
         const userId = new mongoose.Types.ObjectId(sessionUser._id)
         const messages = await UserModel.aggregate([
-            {$match : {id : userId}},
+            {$match : {_id : userId}},
             {$unwind : '$Messages'},
             {$sort : {"Messages.createdAt" : -1}},
             {$group : {_id : "$_id" , Messages : {$push : "$Messages"}}}
