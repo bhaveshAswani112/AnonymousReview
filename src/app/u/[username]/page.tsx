@@ -80,9 +80,7 @@ export default function Page({ params }: { params: { username: string } }) {
     }
   }
 
-  useEffect(() => {
-    fetchingMessages()
-  }, [])
+  
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-gray-800 to-black">
@@ -134,7 +132,7 @@ export default function Page({ params }: { params: { username: string } }) {
               </div>
             ))
           ) : (
-            <div>No Messages to suggest</div>
+            <div></div>
           )}
         </div>
       </div>

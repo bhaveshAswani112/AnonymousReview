@@ -25,7 +25,7 @@ import axios from "axios"
 
 
 
-export default function InputOTPForm() {
+export default function Page() {
   
   const form = useForm<z.infer<typeof VerifySchema>>({
     resolver: zodResolver(VerifySchema),

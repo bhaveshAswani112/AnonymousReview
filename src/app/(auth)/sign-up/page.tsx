@@ -26,7 +26,7 @@ import Link from "next/link"
 
 
 
-export default function page() {
+export default function Page() {
   const [username , setUsername] = useState("");
   const [usernameMessage , setUsernameMessage] = useState("")
   const [checkingUsername , setCheckingUsername] = useState(false)
@@ -105,7 +105,7 @@ export default function page() {
                     {...field}
                     onChange={(e) => {
                       field.onChange(e);
-                      setUsername(e.target.value);
+                      debounced(e.target.value);
                     }}
                   />
                   {checkingUsername && <Loader2 className="animate-spin" />}
@@ -120,7 +120,6 @@ export default function page() {
                       {usernameMessage}
                     </p>
                   )}
-                  <FormMessage />
                 </FormItem>
               )}
             />

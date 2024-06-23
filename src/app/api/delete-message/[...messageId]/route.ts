@@ -1,9 +1,9 @@
 import { User, getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/options"
 import { UserModel } from "@/model/User"
-import { NextApiRequest } from "next"
 
-export  async function DELETE(req : NextApiRequest,{params} :  {params : {messageId : string[]}}){
+
+export  async function DELETE({params} :  any){
     try {
         const session = await getServerSession(authOptions)
         const sessionUser : User = session?.user as User

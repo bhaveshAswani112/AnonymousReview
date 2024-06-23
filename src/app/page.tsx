@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function Home() {
+export default function Page() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-800 to-black">
       <div className="bg-gray-900 rounded-lg shadow-lg p-10 max-w-md w-full text-center">
