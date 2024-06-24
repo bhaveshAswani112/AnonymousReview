@@ -4,5 +4,6 @@ export interface ApiResponse{
     success : boolean
     message : string
     isAcceptingMessage? : boolean
-    messages? : Message[]
+    messages? : Message[],
+    isLoggedIn? : Boolean
 }

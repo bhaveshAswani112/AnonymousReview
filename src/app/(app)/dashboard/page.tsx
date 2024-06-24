@@ -30,6 +30,7 @@ function Page() {
   })
   const {register , watch , setValue} = form
   const acceptMessages = watch('acceptMessages')
+  const LoggedIn = watch('LoggedIn')
 
   const handleMessageDelete = (MessageId : string) => {
     setMessages(messages.filter((message) => message._id != MessageId))
@@ -53,13 +54,32 @@ function Page() {
     }
 
   },[setValue,toast])
+  const fetchLoggedInStatus = useCallback(async () => {
+    try {
+      console.log("Hello from logged in status")
+      setIsSwitchLoading(true)
+      const resp = await axios.get<ApiResponse>("/api/logged-in")
+      // console.log(resp)
+      console.log(resp.data.isLoggedIn)
+      setValue('LoggedIn' , resp.data.isLoggedIn)
+    } catch (error : any) {
+      toast({
+        title : "Failed",
+        description : error?.response?.data?.message || "Failed to fetch logged in status",
+        variant : "destructive"
+      })
+    } finally{
+      setIsSwitchLoading(false)
+    }
+
+  },[setValue,toast])
 
   const fetchMessages = useCallback(async (refresh : boolean = false) => {
     try {
       setIsLoading(true)
       setIsSwitchLoading(true)
       const resp  = await axios.post<ApiResponse>("/api/get-messages")
-      console.log(resp)
+      // console.log(resp)
       setMessages(resp?.data?.messages || [])
       if(refresh){
         toast({
@@ -83,10 +103,34 @@ function Page() {
     if(!session || !session?.user)return
     fetchMessages()
     fetchAcceptMessage()
-  },[session, setValue, toast, fetchAcceptMessage, fetchMessages])
+    fetchLoggedInStatus()
+  },[session, setValue, toast, fetchAcceptMessage, fetchMessages,fetchLoggedInStatus])
+  
+  const handleLoggedInChange = async () => {
+    try {
+      console.log("Hello from handleLoggedInChange")
+      const resp = await axios.post<ApiResponse>("/api/logged-in",{
+        loggedIn : !LoggedIn
+      })
+      console.log(!LoggedIn)
+      setValue('LoggedIn',!LoggedIn)
+      toast({
+        title : "Success",
+        description : resp?.data?.message || "Logged in  status updated successfully"
+      })
+    } catch (error : any) {
+      // console.log("error in handleSwitchChange")
+      console.log(error)
+      toast({
+      title : "Failed",
+      description : error?.response?.data?.message || "Failed to update logged in status",
+      variant : "destructive"
+    })
+    }
+  }
   const handleSwitchChange = async () => {
     try {
-      console.log("Hello from handleSwitchChange")
+      // console.log("Hello from handleSwitchChange")
       const resp = await axios.post<ApiResponse>("/api/accept-messages",{
         acceptMessages : !acceptMessages
       })
@@ -137,7 +181,7 @@ function Page() {
           />
           <Button onClick={copyToClipboard}>Copy</Button>
         </div>
-        <div className='mt-2 font-bold'>You have recieved {numOfMessages} messages</div>
+        {numOfMessages>1 ? <div className='mt-2 font-bold'>You have recieved {numOfMessages} messages</div> : <div className='mt-2 font-bold'>You have recieved {numOfMessages} message</div>}
       </div>
 
       <div className="mb-4">
@@ -149,6 +193,16 @@ function Page() {
         />
         <span className="ml-2">
           Accept Messages: {acceptMessages ? 'On' : 'Off'}
+        </span>
+        <Switch
+          {...register('loggedIn')}
+          checked={acceptMessages && LoggedIn}
+          onCheckedChange={handleLoggedInChange}
+          disabled={isSwitchLoading}
+          className='ml-2'
+        />
+        <span className="ml-2">
+          Accept Messages from loggedIn User: {acceptMessages && LoggedIn ? 'On' : 'Off'}
         </span>
       </div>
       <Separator />

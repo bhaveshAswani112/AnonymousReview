@@ -2,7 +2,8 @@ import mongoose , {Schema , Document} from "mongoose"
 
 export interface Message extends Document {
     content : string,
-    createdAt : Date
+    createdAt : Date,
+    sentBy : User | null
 }
 
 const MessageSchema : Schema<Message> = new Schema({
@@ -15,6 +16,11 @@ const MessageSchema : Schema<Message> = new Schema({
         type : Date,
         required : true,
         default : Date.now()
+    },
+    sentBy : {
+        type : Schema.Types.ObjectId,
+        ref : "User",
+        default : null
     }
 
 })
@@ -27,7 +33,8 @@ export interface User extends Document {
     isVerified : boolean,
     verifyCode : string,
     verifyCodeExpiry : Date
-    Messages : Message[]
+    Messages : Message[],
+    onlyLoggedInUser : boolean
 }
 
 const userSchema : Schema<User> = new Schema({
@@ -61,6 +68,10 @@ const userSchema : Schema<User> = new Schema({
     },
     Messages : {
         type : [MessageSchema]
+    },
+    onlyLoggedInUser : {
+        type : Boolean,
+        default : true
     }
 
 })

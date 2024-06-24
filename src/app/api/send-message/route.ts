@@ -1,6 +1,9 @@
 import { connectDb } from "@/lib/dbConnection";
 import { UserModel } from "@/model/User";
 import {Message} from "@/model/User"
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/options";
+import { User } from "next-auth";
 
 export async function POST(request : Request){
     try {
@@ -24,9 +27,24 @@ export async function POST(request : Request){
                 status : 403
             })
         }
+        let sessionUser: User | null = null
+        if(user?.onlyLoggedInUser){
+            const session = await getServerSession(authOptions)
+            sessionUser   = session?.user as User
+            if(!session || !sessionUser){
+                return Response.json({
+                    message : "Only Logged in User can send message to this user",
+                    success : false
+                },{
+                    status : 403
+                })
+            }
+        }
+        
         const message  = {
             content,
-            createdAt : new Date()
+            createdAt : new Date(),
+            sentBy : sessionUser
         }
         user.Messages.push(message as Message)
         await user.save()
