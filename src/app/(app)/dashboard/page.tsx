@@ -108,6 +108,7 @@ function Page() {
   
   const handleLoggedInChange = async () => {
     try {
+      if(!acceptMessages)return
       console.log("Hello from handleLoggedInChange")
       const resp = await axios.post<ApiResponse>("/api/logged-in",{
         loggedIn : !LoggedIn
