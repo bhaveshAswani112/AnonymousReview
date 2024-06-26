@@ -17,9 +17,11 @@ import { Separator } from '@/components/ui/separator';
 import { Loader2, RefreshCcw } from 'lucide-react';
 import MessageCard from '@/components/MessageCard';
 import {MessageCardSkeleton} from '@/components/MessageSkeleton';
+import { messagesState } from '@/store/message';
+import { useRecoilState } from 'recoil';
 
 function Page() {
-  const [messages , setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useRecoilState(messagesState);
   const [isLoading , setIsLoading] = useState(false)
   const [isSwitchLoading , setIsSwitchLoading] = useState(false)
   const {toast} = useToast()

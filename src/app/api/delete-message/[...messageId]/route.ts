@@ -1,13 +1,16 @@
 import { User, getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/options"
 import { UserModel } from "@/model/User"
+import { NextRequest } from "next/server"
 
 
-export  async function DELETE({params} :  any){
+export async function DELETE(request : NextRequest , { params } :  any){
     try {
         const session = await getServerSession(authOptions)
         const sessionUser : User = session?.user as User
-        const id = params.messageId[0]
+        console.log("I am params")
+        console.log(params)
+        const id = params?.messageId[0]
         // console.log("I am message id")
         // console.log(id)
         if(!sessionUser){
@@ -48,3 +51,4 @@ export  async function DELETE({params} :  any){
         })
     }
 }
+

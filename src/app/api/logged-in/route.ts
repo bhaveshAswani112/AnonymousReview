@@ -18,6 +18,7 @@ export async function POST(request : Request){
                 status : 400
             })
         }
+        
         const {loggedIn} = await request.json()
         // console.log("I have accept messages")
         // console.log(acceptMessages)
@@ -31,7 +32,6 @@ export async function POST(request : Request){
             return Response.json({
                 message : "Failed to update logged In status",
                 success : false,
-                user
             },{
                 status : 400
             })
