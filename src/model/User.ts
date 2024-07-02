@@ -1,6 +1,7 @@
 import mongoose , {Schema , Document} from "mongoose"
 
 export interface Message extends Document {
+    _id : string
     content : string,
     createdAt : Date,
     sentBy : string | null
@@ -20,7 +21,7 @@ const MessageSchema : Schema<Message> = new Schema({
     sentBy : {
        type : String,
        default : null
-    }
+    },
 
 })
 
