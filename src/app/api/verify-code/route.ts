@@ -3,7 +3,7 @@ import { connectDb } from "@/lib/dbConnection";
 import { UserModel } from "@/model/User";
 import {z} from "zod"
 import { UsernameValidation } from "@/Schemas/SignUp";
-import { compareSync } from "bcryptjs";
+
 
 const UsernameQuerySchema = z.object({
     username : UsernameValidation,

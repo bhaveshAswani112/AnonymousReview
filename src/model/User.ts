@@ -3,7 +3,7 @@ import mongoose , {Schema , Document} from "mongoose"
 export interface Message extends Document {
     content : string,
     createdAt : Date,
-    sentBy : User | null
+    sentBy : string | null
 }
 
 const MessageSchema : Schema<Message> = new Schema({
@@ -18,9 +18,8 @@ const MessageSchema : Schema<Message> = new Schema({
         default : Date.now()
     },
     sentBy : {
-        type : Schema.Types.ObjectId,
-        ref : "User",
-        default : null
+       type : String,
+       default : null
     }
 
 })

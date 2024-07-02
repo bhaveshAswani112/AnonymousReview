@@ -40,11 +40,11 @@ export async function POST(request : Request){
                 })
             }
         }
-        
+        console.log(typeof sessionUser?.username)
         const message  = {
             content,
             createdAt : new Date(),
-            sentBy : sessionUser
+            sentBy : sessionUser?.username
         }
         user.Messages.push(message as Message)
         await user.save()
