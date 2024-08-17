@@ -32,7 +32,6 @@ export async function POST(request : Request) {
             }
         }
         else{
-            
             const hashedPassword = await bcrypt.hash(password,10)
             const newUser = await UserModel.create({
                 username,
