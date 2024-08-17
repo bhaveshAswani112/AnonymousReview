@@ -33,7 +33,7 @@ export async function POST(request : Request) {
         }
         else{
             const hashedPassword = await bcrypt.hash(password,10)
-            const newUser = await UserModel.create({
+            await UserModel.create({
                 username,
                 email,
                 password : hashedPassword,
@@ -43,7 +43,7 @@ export async function POST(request : Request) {
             })
         }
             const emailVerification = await sendEmail(username,email,verifyCode)
-            console.log(emailVerification)
+            // console.log(emailVerification)
             if(!emailVerification.success){
                 return Response.json({
                     success : false,
