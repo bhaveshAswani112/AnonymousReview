@@ -6,6 +6,8 @@ type ConnectionObject = {
 
 const connection : ConnectionObject = {}
 
+const mongodburi = process.env.MONGODB_URI || "mongodb://username:password@localhost:27017/database_name"
+
 
 export const connectDb = async () : Promise<void> => {
     if(connection?.isConnected){
@@ -14,7 +16,7 @@ export const connectDb = async () : Promise<void> => {
     }
 
     try {
-        const db : any = await mongoose.connect(`${process.env.MONGODB_URI}/AnonymousReview`)
+        const db : any = await mongoose.connect(`${mongodburi}/AnonymousReview`)
         // console.log(db)
         connection.isConnected = db.connections[0].readyState
     } catch (error) {
