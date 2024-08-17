@@ -25,6 +25,7 @@ import { X } from "lucide-react";
 import { Message } from "@/model/User";
 import axios from "axios";
 import { toast } from "./ui/use-toast";
+import { useState } from "react";
 
 type MessageType = {
   Message: Message;
