@@ -6,7 +6,7 @@ type ConnectionObject = {
 
 const connection : ConnectionObject = {}
 
-const mongodburi = process.env.MONGODB_URI || "mongodb://username:password@localhost:27017/database_name"
+const mongodburi = process.env.MONGODB_URI || "mongodb://username:password@localhost:27017"
 
 
 export const connectDb = async () : Promise<void> => {
