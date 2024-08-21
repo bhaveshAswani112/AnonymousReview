@@ -25,6 +25,9 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: bhaveshaswani112/anonymous-review:latest
+        build-args: 
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          
 
     - name: Verify Pushed Image
       run: docker pull bhaveshaswani112/anonymous-review:latest
@@ -39,4 +42,4 @@ jobs:
           sudo docker pull bhaveshaswani112/anonymous-review:latest
           sudo docker stop web-app || true
           sudo docker rm web-app || true
-          sudo docker run -d --name web-app -p 3005:3000 bhaveshaswani112/anonymous-review:latest
+          sudo docker run -d --name web-app -p 3005:3000 -e MONGODB_URI=${{ secrets.MONGODB_URI }} -e
