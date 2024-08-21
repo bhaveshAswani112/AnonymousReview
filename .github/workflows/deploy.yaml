@@ -25,6 +25,8 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: bhaveshaswani112/anonymous-review:latest
+        build-args:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
     - name: Verify Pushed Image
       run: docker pull bhaveshaswani112/anonymous-review:latest
