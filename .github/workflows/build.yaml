@@ -24,6 +24,7 @@ jobs:
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: |
-          npm run build
-          # Use the MONGODB_URI secret in your code
-          node -e "console.log(process.env.MONGODB_URI)"
+          node -e "
+            const mongodburi = process.env.MONGODB_URI;
+            console.log(mongodburi);
+          "
