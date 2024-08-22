@@ -16,9 +16,11 @@ export const connectDb = async () : Promise<void> => {
     }
 
     try {
-        const db : any = await mongoose.connect(`${mongodburi}/AnonymousReview`)
-        // console.log(db)
-        connection.isConnected = db.connections[0].readyState
+        if(process.env.NODE_ENV === 'production'){
+            const db : any = await mongoose.connect(`${mongodburi}/AnonymousReview`)
+            // console.log(db)
+            connection.isConnected = db.connections[0].readyState
+        }
     } catch (error) {
         // @ts-ignore
         console.log("Database connection failed " + error.message)
