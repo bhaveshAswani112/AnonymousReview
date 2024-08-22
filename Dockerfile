@@ -8,9 +8,7 @@ RUN npm install
 
 COPY . .
 
-# Use build argument for MONGODB_URI
-ARG MONGODB_URI
-ENV MONGODB_URI=${MONGODB_URI}
+
 
 RUN npm run build
 
@@ -20,9 +18,8 @@ WORKDIR /src/app
 
 COPY --from=builder /src/app ./
 
-# Reuse the build argument in the final image
-ARG MONGODB_URI
-ENV MONGODB_URI=${MONGODB_URI}
+
+
 
 EXPOSE 3000
 
