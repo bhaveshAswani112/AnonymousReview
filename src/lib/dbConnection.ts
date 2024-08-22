@@ -16,7 +16,9 @@ export const connectDb = async () : Promise<void> => {
     }
 
     try {
-        if(process.env.NODE_ENV === 'production'){
+        console.log("Hello I am NODE ENV")
+        console.log(process.env.NODE_ENV)
+        if(process?.env?.NODE_ENV === 'production'){
             const db : any = await mongoose.connect(`${mongodburi}/AnonymousReview`)
             // console.log(db)
             connection.isConnected = db.connections[0].readyState
