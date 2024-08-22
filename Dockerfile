@@ -1,20 +1,16 @@
 FROM node:20.12.0-alpine3.19 AS builder
 
-
 WORKDIR /src/app
-
 
 COPY package.json package-lock.json ./
 
-
 RUN npm install
-
 
 COPY . .
 
-
-ENV MONGODB_URI=$MONGODB_URI
-
+# Use build argument for MONGODB_URI
+ARG MONGODB_URI
+ENV MONGODB_URI=${MONGODB_URI}
 
 RUN npm run build
 
@@ -24,7 +20,9 @@ WORKDIR /src/app
 
 COPY --from=builder /src/app ./
 
-ENV MONGODB_URI=$MONGODB_URI
+# Reuse the build argument in the final image
+ARG MONGODB_URI
+ENV MONGODB_URI=${MONGODB_URI}
 
 EXPOSE 3000
 
