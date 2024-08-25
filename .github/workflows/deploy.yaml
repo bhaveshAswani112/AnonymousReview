@@ -34,6 +34,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           sudo docker pull bhaveshaswani112/anonymous-review:latest
-          sudo docker stop anonymous-review || true
+          sudo docker stop anonymous-review ||  true
           sudo docker rm anonymous-review || true
           sudo docker run -d --name anonymous-review -p 3005:3000 -e MONGODB_URI=${{ secrets.MONGODB_URI }} bhaveshaswani112/anonymous-review:latest
