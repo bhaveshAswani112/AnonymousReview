@@ -14,7 +14,7 @@ export const connectDb = async () : Promise<void> => {
         console.log("Already connected to database")
         return 
     }
-
+    console.log(mongodburi)
     try {
         console.log("Hello I am NODE ENV")
         console.log(process.env.NODE_ENV)
