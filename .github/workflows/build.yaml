@@ -20,7 +20,7 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm install
-      - name: Run build
+      - name: Log MongoDB URI
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: |
@@ -28,3 +28,7 @@ jobs:
             const mongodburi = process.env.MONGODB_URI;
             console.log(mongodburi);
           "
+      - name: Run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        run: npm run build
