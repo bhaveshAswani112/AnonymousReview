@@ -19,7 +19,8 @@ jobs:
         MONGODB_URI: ${{ secrets.MONGODB_URI }}
       run: |
         echo "MongoDB URI: $MONGODB_URI"
-        docker build -t bhaveshaswani112/anonymous-review:latest .
+        docker build --build-arg MONGODB_URI=${{ secrets.MONGODB_URI }} -t bhaveshaswani112/anonymous-review .
+
         docker push bhaveshaswani112/anonymous-review:latest
     - name: Verify Pushed Image
       run: docker pull bhaveshaswani112/anonymous-review:latest

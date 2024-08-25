@@ -9,6 +9,13 @@ RUN npm install
 COPY . .
 
 
+# Define the ARG in the Dockerfile
+ARG MONGODB_URI
+
+# Optionally, set an ENV variable based on this ARG
+ENV MONGODB_URI=$MONGODB_URI
+
+
 
 RUN npm run build
 
