@@ -25,6 +25,8 @@ jobs:
       run: docker pull bhaveshaswani112/anonymous-review:latest
     - name: Deploy to EC2
       uses: appleboy/ssh-action@master
+      env:
+        MONGODB_URI: ${{ secrets.MONGODB_URI }}
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
