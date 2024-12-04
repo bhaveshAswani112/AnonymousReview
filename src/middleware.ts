@@ -15,7 +15,7 @@ export async  function middleware(request: NextRequest) {
   console.log(token)
   console.log("------------------------")
   console.log(process.env.SENDER)
-  console.log(process.env.PASSWORD)
+  console.log(process.env.GMAILSECRET)
   console.log("------------------------")
   const url = request.nextUrl
   console.log(url)
