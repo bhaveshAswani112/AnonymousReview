@@ -19,7 +19,7 @@ jobs:
 
     - name: Build and Push Docker image
       run: |
-        docker build \
+        docker buildx build \
           --build-arg MONGODB_URI=${{ secrets.MONGODB_URI }} \
           --build-arg RESEND_API_KEY=${{ secrets.RESEND_API_KEY }} \
           --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
@@ -27,9 +27,9 @@ jobs:
           --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
           --build-arg SENDER=${{ secrets.SENDER }} \
           --build-arg PASSWORD=${{ secrets.PASSWORD }} \
-          -t bhaveshaswani112/anonymous-review .
+          -t bhaveshaswani112/anonymous-review:latest \
+          --push .
 
-        docker push bhaveshaswani112/anonymous-review:latest
 
     - name: Verify Pushed Image
       run: docker pull bhaveshaswani112/anonymous-review:latest
