@@ -1,4 +1,4 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, SessionStrategy } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDb } from "@/lib/dbConnection";
 import { UserModel } from "@/model/User";
@@ -62,11 +62,18 @@ export const authOptions : NextAuthOptions = {
             return session
         },
     },
+
     session : {
-        strategy : "jwt"
+        strategy : "jwt" as SessionStrategy,
+        maxAge : 1*24*60*60,
+        
+    },
+    jwt : {
+        maxAge : 1*24*60*60
     },
     pages : {
         signIn : "/sign-in"
     },
+    useSecureCookies : true,
     secret : process.env.NEXTAUTH_SECRET,
 }
