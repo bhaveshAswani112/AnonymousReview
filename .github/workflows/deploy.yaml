@@ -20,13 +20,13 @@ jobs:
     - name: Build and Push Docker image
       run: |
         docker build \
-          --build-arg MONGODB_URI=${{ secrets.MONGODB_URI }} \
-          --build-arg RESEND_API_KEY=${{ secrets.RESEND_API_KEY }} \
-          --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
-          --build-arg GROQ_API_KEY=${{ secrets.GROQ_API_KEY }} \
-          --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
-          --build-arg SENDER=${{ secrets.SENDER }} \
-          --build-arg GMAIL_SECRET=${{ secrets.GMAIL_SECRET }} \
+          --build-arg MONGODB_URI="${{ secrets.MONGODB_URI }}" \
+          --build-arg RESEND_API_KEY="${{ secrets.RESEND_API_KEY }}" \
+          --build-arg NEXTAUTH_SECRET="${{ secrets.NEXTAUTH_SECRET }}" \
+          --build-arg GROQ_API_KEY="${{ secrets.GROQ_API_KEY }}" \
+          --build-arg NEXTAUTH_URL="${{ secrets.NEXTAUTH_URL }}" \
+          --build-arg SENDER="${{ secrets.SENDER }}" \
+          --build-arg GMAIL_SECRET="${{ secrets.GMAIL_SECRET }}" \
           -t bhaveshaswani112/anonymous-review .
 
         docker push bhaveshaswani112/anonymous-review:latest
