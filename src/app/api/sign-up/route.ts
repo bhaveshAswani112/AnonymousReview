@@ -44,8 +44,6 @@ export async function POST(request : NextRequest) {
             })
         }
             const url = request.nextUrl.origin
-            console.log(process.env.SENDER)
-            console.log(process.env.PASSWORD)
             const emailVerification = await sendEmailNodemail(username,email,verifyCode,url)
             // console.log(emailVerification)
             if(!emailVerification.success){

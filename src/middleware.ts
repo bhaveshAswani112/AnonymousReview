@@ -13,6 +13,10 @@ export async  function middleware(request: NextRequest) {
   console.log(process.env.NEXTAUTH_SECRET)
   const token = await getToken({req : request , secret: process.env.NEXTAUTH_SECRET})
   console.log(token)
+  console.log("------------------------")
+  console.log(process.env.SENDER)
+  console.log(process.env.PASSWORD)
+  console.log("------------------------")
   const url = request.nextUrl
   console.log(url)
   if(token && (url.pathname.startsWith("/sign-in") || url.pathname.startsWith("/sign-up"))){
