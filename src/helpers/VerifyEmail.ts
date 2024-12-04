@@ -5,8 +5,6 @@ import { ApiResponse } from '@/types/ApiResponse';
 export const sendEmail = async (username : string , email : string , verifyCode : string) : Promise<ApiResponse> => {
     try {
         console.log("In send email")
-        console.log(process.env.SENDER)
-        console.log(process.env.PASSWORD)
         await resend.emails.send({
             from: 'onboarding@resend.dev',
             to: email,
