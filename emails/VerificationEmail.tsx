@@ -38,7 +38,7 @@ import {
           </Row>
           <Row>
             <Text>
-              Thank you for registering. Please use the following verification
+              Thank you for registering with us. Please use the following verification
               code to complete your registration:
             </Text>
           </Row>
@@ -52,7 +52,7 @@ import {
           </Row>
           <Row>
             <Button
-              href={`http://ec2-13-126-55-18.ap-south-1.compute.amazonaws.com/verify/${username}`}
+              href={`https://anonymous.vanii.ai/verify/${username}`}
               style={{ color: '#61dafb' }}
             >
               Verify here
