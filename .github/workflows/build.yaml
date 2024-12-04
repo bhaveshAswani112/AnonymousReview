@@ -23,6 +23,8 @@ jobs:
       - name: Log MongoDB URI
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          SENDER: ${{ secrets.SENDER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           node -e "
             const mongodburi = process.env.MONGODB_URI;
@@ -31,4 +33,6 @@ jobs:
       - name: Run build
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          SENDER: ${{ secrets.SENDER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
         run: npm run build

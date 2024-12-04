@@ -25,7 +25,8 @@ jobs:
           --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
           --build-arg GROQ_API_KEY=${{ secrets.GROQ_API_KEY }} \
           --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
-          --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
+          --build-arg SENDER=${{ secrets.SENDER }} \
+          --build-arg PASSWORD=${{ secrets.PASSWORD }} \
           -t bhaveshaswani112/anonymous-review .
 
         docker push bhaveshaswani112/anonymous-review:latest
@@ -51,4 +52,6 @@ jobs:
             -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
             -e GROQ_API_KEY=${{ secrets.GROQ_API_KEY }} \
             -e NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
+            -e SENDER=${{ secrets.SENDER }} \
+            -e PASSWORD=${{ secrets.PASSWORD }} \
             bhaveshaswani112/anonymous-review:latest
