@@ -54,4 +54,4 @@ jobs:
             -e NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
             -e SENDER=${{ secrets.SENDER }} \
             -e GMAIL_SECRET=${{ secrets.GMAIL_SECRET }} \
-            bhaveshaswani112/anonymous-review:latest
+            bhaveshaswani112/anonymous-review
