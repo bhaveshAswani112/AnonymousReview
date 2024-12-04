@@ -27,7 +27,7 @@ import {
               url: 'https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
               format: 'woff2',
             }}
-            fontWeight={400}
+            fontWeight={500}
             fontStyle="normal"
           />
         </Head>
