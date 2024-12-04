@@ -52,7 +52,7 @@ import {
           </Row>
           <Row>
             <Button
-              href={`https://anonymous.vanii.ai/verify/${username}`}
+              href={`https://anonify.vanii.ai/verify/${username}`}
               style={{ color: '#61dafb' }}
             >
               Verify here
