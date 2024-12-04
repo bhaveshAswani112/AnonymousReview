@@ -74,7 +74,7 @@ export const sendEmailNodemail = async (username: string, email: string, verifyC
     </div>
     <div class="row">
       <p class="text">
-        Thank you for registering with us. Please use the following verification code to complete your registration with anonify:
+        Thank you for registering with us. Please use the following verification code to complete your registration with anonify :
       </p>
     </div>
     <div class="row">
