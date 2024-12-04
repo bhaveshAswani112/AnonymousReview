@@ -26,11 +26,14 @@ export async function POST(request : Request){
                 status : 400
             })
         }
-
+        console.log(username)
+        console.log(UsernameQuerySchema.safeParse({username}))
         const user = await UserModel.findOne({
-            username
+            username : username,
+            isVerified : false
         })
-
+        console.log("Hii I am user")
+        console.log(user)
         if(!user){
             return Response.json({
                 message : "No user exist with this username",

@@ -11,9 +11,11 @@ const mongodburi = process.env.MONGODB_URI || "mongodb://username:password@local
 
 export const connectDb = async () : Promise<void> => {
     if(connection?.isConnected){
+        console.log(connection.isConnected)
         console.log("Already connected to database")
         return 
     }
+    
     console.log(mongodburi)
     try {
         console.log("Hello I am NODE ENV")
@@ -27,6 +29,9 @@ export const connectDb = async () : Promise<void> => {
         // @ts-ignore
         console.log("Database connection failed " + error.message)
         process.exit(1)
+    } finally {
+        console.log(connection.isConnected)
+        console.log("Database connected successfully.")
     }
 
 }

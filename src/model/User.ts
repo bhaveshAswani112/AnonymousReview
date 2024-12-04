@@ -42,7 +42,7 @@ const userSchema : Schema<User> = new Schema({
         type : String,
         required : [true , "Username is required"],
         unique : true,
-        trime : true
+        trim : true
     },
     password : {
         type : String,

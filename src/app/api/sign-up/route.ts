@@ -1,9 +1,10 @@
-import { sendEmail } from "@/helpers/VerifyEmail";
+import { sendEmail, sendEmailNodemail } from "@/helpers/VerifyEmail";
 import { connectDb } from "@/lib/dbConnection";
 import { UserModel } from "@/model/User";
 import bcrypt from "bcryptjs"
+import { NextRequest } from "next/server";
 
-export async function POST(request : Request) {
+export async function POST(request : NextRequest) {
     try {
         await connectDb()
         const {username , email , password} = await request.json()
@@ -42,7 +43,8 @@ export async function POST(request : Request) {
 
             })
         }
-            const emailVerification = await sendEmail(username,email,verifyCode)
+            const url = request.nextUrl.origin
+            const emailVerification = await sendEmailNodemail(username,email,verifyCode,url)
             // console.log(emailVerification)
             if(!emailVerification.success){
                 return Response.json({

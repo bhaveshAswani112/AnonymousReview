@@ -16,8 +16,9 @@ export const authOptions : NextAuthOptions = {
             },
             async authorize(credentials) : Promise<any>{
                 try {
+                    console.log("Connecting DB")
                     await connectDb()
-                    console.log(credentials?.email)
+                    console.log(credentials)
                     const existingUser = await UserModel.findOne({
                         email : credentials?.email
                     })
@@ -41,6 +42,10 @@ export const authOptions : NextAuthOptions = {
             }
         })
     ],
+    jwt : {
+        maxAge : 1*24*60*60
+    },
+    // useSecureCookies : true,
     callbacks : {
         async jwt({ token , user}) {
             if(user){
@@ -52,7 +57,7 @@ export const authOptions : NextAuthOptions = {
             return token
         },
 
-        async session({session , token}) {
+        async session({session , token , user}) {
             if(token){
                 session.user._id = token._id
                 session.user.username = token.username
@@ -68,12 +73,10 @@ export const authOptions : NextAuthOptions = {
         maxAge : 1*24*60*60,
         
     },
-    jwt : {
-        maxAge : 1*24*60*60
-    },
+    
     pages : {
         signIn : "/sign-in"
     },
-    useSecureCookies : true,
+    
     secret : process.env.NEXTAUTH_SECRET,
 }

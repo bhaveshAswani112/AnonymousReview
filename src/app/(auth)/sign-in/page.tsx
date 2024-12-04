@@ -56,6 +56,7 @@ function Page() {
         title: "Success",
         description: "Sign in successful"
       })
+      console.log("going to dashboard")
       router.push('/dashboard')  
     } catch (error) {
       console.log(error)
