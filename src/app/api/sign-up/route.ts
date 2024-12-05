@@ -25,11 +25,17 @@ export async function POST(request : NextRequest) {
                 })
             }
             else{
-                const hashedPassword = await bcrypt.hash(password,10)
-                existingUser.password = hashedPassword
-                existingUser.verifyCode = verifyCode
-                existingUser.verifyCodeExpiry = expiryDate
-                await existingUser.save()
+                const hashedPassword = await bcrypt.hash(password, 10);
+                const updateFields = {
+                    password: hashedPassword,
+                    verifyCode: verifyCode,
+                    verifyCodeExpiry: expiryDate,
+                };
+
+                await UserModel.updateOne(
+                    { _id: existingUser._id }, // Filter to find the specific user by ID
+                    { $set: updateFields }     // Update the specified fields
+                );
             }
         }
         else{
