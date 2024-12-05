@@ -29,8 +29,7 @@ export async function POST(request : Request){
         console.log(username)
         console.log(UsernameQuerySchema.safeParse({username}))
         const user = await UserModel.findOne({
-            username : username,
-            isVerified : false
+            username : UsernameQuerySchema.safeParse({username})
         })
         console.log("Hii I am user")
         console.log(user)
