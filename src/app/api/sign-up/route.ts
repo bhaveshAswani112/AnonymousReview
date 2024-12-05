@@ -30,6 +30,7 @@ export async function POST(request : NextRequest) {
                     password: hashedPassword,
                     verifyCode: verifyCode,
                     verifyCodeExpiry: expiryDate,
+                    username : username
                 };
 
                 await UserModel.updateOne(
