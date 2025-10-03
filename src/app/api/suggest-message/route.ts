@@ -54,7 +54,7 @@ export async function POST(req: Request) {
         },
       ],
   
-      model: "llama3-8b-8192",
+      model: "llama-3.1-8b-instant",
   
       // Controls randomness: lowering results in less random completions.
       // As the temperature approaches zero, the model will become deterministic

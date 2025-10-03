@@ -16,6 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   message: z.string().min(10, {
@@ -34,6 +35,7 @@ export default function Page({ params }: { params: { username: string } }) {
       message: "",
     },
   })
+  const router = useRouter()
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
@@ -80,10 +82,22 @@ export default function Page({ params }: { params: { username: string } }) {
     }
   }
 
+  const handleLoginClick = () => {
+    router.push('/login')
+  }
+
   
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-gray-800 to-black">
+      <div className="absolute top-4 right-4">
+        <Button 
+          onClick={handleLoginClick}
+          className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-lg transition-all duration-300"
+        >
+          Login
+        </Button>
+      </div>
       <div className="bg-gray-900 rounded-lg shadow-lg p-10 max-w-lg w-full text-center mb-6">
         <h1 className="text-3xl font-extrabold mb-6 text-white">Send a Message to {username}</h1>
         <Form {...form}>

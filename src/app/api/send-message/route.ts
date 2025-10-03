@@ -8,7 +8,7 @@ import { User } from "next-auth";
 export async function POST(request : Request){
     try {
         await connectDb()
-        console.log("Hello from sendmessage")
+        // console.log("Hello from sendmessage")
         const {username , content}  = await request.json()
         const user = await UserModel.findOne({username})
         if(!user){
