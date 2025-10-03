@@ -88,7 +88,7 @@ export default function Page({ params }: { params: { username: string } }) {
     if (session) {
       router.push('/dashboard')
     } else {
-      router.push('/login')
+      router.push('/sign-in')
     }
   }
 
